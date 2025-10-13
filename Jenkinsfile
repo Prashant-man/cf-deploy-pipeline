@@ -10,7 +10,7 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'main', url: 'https://github.com/Prashant-man/cf-deploy-pipeline.git'
+        git branch: 'Prashant-automation', url: 'https://github.com/Prashant-man/cf-deploy-pipeline.git'
       }
     }
 
