@@ -2,7 +2,9 @@ pipeline {
   agent any
 
   environment {
-    AWS_DEFAULT_REGION = 'us-east-1'  // your AWS region
+    AWS_ACCESS_KEY_ID     = 'AKIA5UMDMQGBPB63UF4M'
+    AWS_SECRET_ACCESS_KEY = 'WEPDWhAkRKm46UjX4P/yLKgm1AGakMzFna/QtPdt'
+    AWS_DEFAULT_REGION    = 'us-east-1'
   }
 
   stages {
@@ -14,18 +16,12 @@ pipeline {
 
     stage('Deploy CloudFormation Stack') {
       steps {
-        withCredentials([[
-          $class: 'AmazonWebServicesCredentialsBinding', 
-          credentialsId: '245d8a7b-a2f6-4ebe-b09a-ab58c64a1815' // your Jenkins credential ID
-        ]]) {
-          sh '''
-            echo "Deploying CloudFormation stack using templates/ec2.yaml"
-            aws cloudformation deploy \
-              --template-file templates/ec2.yaml \
-              --stack-name MyEC2Stack \
-              --capabilities CAPABILITY_NAMED_IAM
-          '''
-        }
+        sh '''
+          aws cloudformation deploy \
+            --template-file templates/ec2.yaml \
+            --stack-name MyEC2Stack \
+            --capabilities CAPABILITY_NAMED_IAM
+        '''
       }
     }
   }
