@@ -14,6 +14,13 @@ pipeline {
       }
     }
 
+   stage('List files') {
+      steps {
+        sh 'ls -R'
+      }
+    }
+
+
     stage('Deploy CloudFormation Stack') {
       steps {
         sh '''
